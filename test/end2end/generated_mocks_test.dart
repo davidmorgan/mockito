@@ -30,6 +30,8 @@ import 'generated_mocks_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<Foo>(as: #MockFooNice),
   MockSpec<Bar>(as: #MockBarNice),
+  MockSpec<Bop>(),
+  MockSpec<Y>(),
   MockSpec<UsesExtTypes>()
 ])
 void main() {
@@ -46,6 +48,17 @@ void main() {
       // In some of the tests that expect an Error to be thrown, Mockito's
       // global state can become invalid. Reset it.
       resetMockitoState();
+    });
+
+    test('macro', () {
+      final mock = MockBop();
+      when(mock.x()).thenReturn('y');
+      expect(mock.x(), 'y');
+
+      final mock2 = MockY();
+      final y = Y();
+      when(mock2.y()).thenReturn(y);
+      expect(identical(mock2.y(), y), true);
     });
 
     test('a method with a positional parameter can be stubbed', () {

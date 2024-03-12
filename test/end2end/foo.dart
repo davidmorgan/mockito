@@ -1,6 +1,16 @@
 // ignore_for_file: library_private_types_in_public_api
 
+@DeclareY()
+library;
+
+import 'package:mockito/macro/macro.dart';
+
 import 'foo_sub.dart';
+
+@DeclareX()
+class Bop {
+  Y createY() => Y();
+}
 
 class Foo<T> {
   const Foo();
